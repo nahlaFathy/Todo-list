@@ -1,6 +1,6 @@
 
 import { NextFunction, Request, Response } from 'express';
-import todoService from '../services/todo.service';
+import todoService from '../services/user.service';
 import { Types } from 'mongoose';
 class TodoController {
 
@@ -28,6 +28,12 @@ class TodoController {
         const { userId, todoId } = req.params;
         const userTodo = await todoService.getTodoByUserIdAndTodoId(new Types.ObjectId(userId), new Types.ObjectId(todoId));
         return res.status(200).json({ data: userTodo })
+    }
+
+    async getAllTodosForUser (req: Request, res: Response, next: NextFunction) {
+        const { userId } = req.params; 
+        const userTodos = await todoService.getAllTodosForUser(new Types.ObjectId(userId));
+        return res.status(200).json({ data: userTodos });
     }
 
 }

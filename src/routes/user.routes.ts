@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
-import TodoController from '../controllers/todo.controllers';
+import TodoController from '../controllers/user.controllers';
 
 class TodoRouter {
 	private _router =  express();
@@ -27,6 +27,11 @@ class TodoRouter {
 		this._router.get('/:userId/todo/:todoId', (req: Request, res: Response, next: NextFunction) => {
 			TodoController.getTodoForUser(req, res, next);
 		});
+
+		this._router.get('/:userId/todos', (req: Request, res: Response, next: NextFunction) => {
+			TodoController.getAllTodosForUser(req, res, next);
+		});
+
 	}
 
 }
