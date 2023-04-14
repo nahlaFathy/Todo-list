@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose';
-import Todo from './todo';
-
+import * as bcrypt from 'bcrypt';
 // user schema
 
 const userSchema = new Schema({
@@ -18,7 +17,30 @@ const userSchema = new Schema({
   }
 });
 
+// hashing user secret before creating new user 
+userSchema.pre("save", async function (next) {
+  const user = this;
+  if (!user.isModified('secret')) {
+    return next();
+  }
+  if (user.secret) {
+    try {
+      const salt = await bcrypt.genSalt(10);
+      bcrypt.hash(user.secret, salt, (err, hashedPassword) => {
+        if (err) {
+          return;
+        }
+        user.secret = hashedPassword;
+        next();
+      });
+    } catch (err: any) {
+      return next(err);
+    }
+  }
+});
+
 const User = model('User', userSchema);
 
-export default  User;
+
+export default User;
 

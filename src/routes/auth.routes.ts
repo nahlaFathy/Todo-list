@@ -12,9 +12,8 @@ class AuthRouter {
 	}
 
     private _routes() {
-		this._router.post('/login', (req: Request, res: Response, next: NextFunction) => {
-			AuthController.login(req, res, next)
-		});
+		this._router.post('/login', AuthController.login);
+        this._router.post('/signup', AuthController.signup);
 	}
 
 }
