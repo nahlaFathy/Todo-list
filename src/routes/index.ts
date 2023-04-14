@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import bodyParser from 'body-parser'
-import TodoRouter from './user.routes';
+import UserRouter from './user.routes';
 
 class MasterRouter {
 	private _router = Router();
-	private _todoRouter = TodoRouter;
+	private _userRouter = UserRouter;
 	get router() {
 		return this._router;
 	}
@@ -19,7 +19,7 @@ class MasterRouter {
 	private _configure() {
 		this._router.use(bodyParser.json());
 		this._router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-		this._router.use('/user', this._todoRouter);
+		this._router.use('/user', this._userRouter);
 	}
 }
 

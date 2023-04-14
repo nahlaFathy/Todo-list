@@ -10,7 +10,7 @@ interface ITODO {
     user: Types.ObjectId;
 
 }
-class TodoService {
+class UserService {
 
     public async createTodo(userId: Types.ObjectId, todo: ITODO) {
         const { title, description, completed } = todo;
@@ -98,7 +98,7 @@ class TodoService {
             }
 
             // Find the Todo by User ID and Todo ID
-            const todo = await Todo.findOne({ _id: todoId, userId: userId });
+            const todo = await Todo.findOne({ _id: todoId, user: userId });
             if (!todo) {
                 throw new Error('Todo not found');
             }
@@ -111,4 +111,4 @@ class TodoService {
 
 }
 
-export default new TodoService();
+export default new UserService();
