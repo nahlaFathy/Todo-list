@@ -19,6 +19,8 @@ class UserRouter {
 		this._router.delete('/todo/:todoId', authenticateUser, TodoController.deleteTodo);
 
 		this._router.get('/todo/:todoId', authenticateUser, TodoController.getTodoForUser);
+
+		this._router.get('/todos', authenticateUser, TodoController.getAllTodosForUser);
 	}
 
 }

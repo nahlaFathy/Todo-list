@@ -109,6 +109,23 @@ class UserService {
         }
     };
 
+    async getAllTodosForUser(userId: Types.ObjectId) {
+        try {
+
+            // Find the User by ID
+            const user = await User.findById(userId);
+            if (!user) {
+                throw new Error('User not found');
+            }
+
+            // Find all Todos that belong to the specific User
+            const todos = await Todo.find({ user: userId });
+            return todos;
+        } catch (err: any) {
+            throw new Error(err)
+        }
+    }
+
 }
 
 export default new UserService();

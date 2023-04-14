@@ -11,7 +11,7 @@ class TodoController {
             const createdTodo = await todoService.createTodo(new Types.ObjectId(userId), todo);
             return res.status(200).json({ data: createdTodo })
         } catch (error: any) {
-            return res.status(error.statusCode || 500).json({ error : error.message })
+            return res.status(error.statusCode || 500).json({ error: error.message })
         }
     }
 
@@ -49,7 +49,16 @@ class TodoController {
         }
     }
 
+    async getAllTodosForUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            const userId  = req.userId;
+            const userTodos = await todoService.getAllTodosForUser(new Types.ObjectId(userId));
+            return res.status(200).json({ data: userTodos });
+        } catch (error: any) {
+            return res.status(error.statusCode || 500).json({ error: error.message })
+        }
 
+    }
 }
 
 export default new TodoController();
