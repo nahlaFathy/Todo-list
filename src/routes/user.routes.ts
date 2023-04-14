@@ -28,9 +28,7 @@ class UserRouter {
 			TodoController.getTodoForUser(req, res, next);
 		});
 
-		this._router.get('/:userId/todos', (req: Request, res: Response, next: NextFunction) => {
-			UserController.getAllTodosForUser(req, res, next);
-		});
+		this._router.get('/todos', authenticateUser, TodoController.getAllTodosForUser);
 
 	}
 

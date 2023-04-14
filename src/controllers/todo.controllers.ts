@@ -51,7 +51,7 @@ class TodoController {
 
     async getAllTodosForUser(req: Request, res: Response, next: NextFunction) {
         try {
-            const { userId } = req.params;
+            const userId  = req.userId;
             const userTodos = await todoService.getAllTodosForUser(new Types.ObjectId(userId));
             return res.status(200).json({ data: userTodos });
         } catch (error: any) {
