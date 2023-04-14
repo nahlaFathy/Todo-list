@@ -30,10 +30,14 @@ class TodoController {
         return res.status(200).json({ data: userTodo })
     }
 
-    async getAllTodosForUser (req: Request, res: Response, next: NextFunction) {
-        const { userId } = req.params; 
-        const userTodos = await todoService.getAllTodosForUser(new Types.ObjectId(userId));
-        return res.status(200).json({ data: userTodos });
+    async getAllTodosForUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { userId } = req.params;
+            const userTodos = await todoService.getAllTodosForUser(new Types.ObjectId(userId));
+            return res.status(200).json({ data: userTodos });
+        } catch (error: any) {
+            return res.status(error.statusCode || 500).json({ error: error.message })
+        }
     }
 
 }

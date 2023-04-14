@@ -119,7 +119,7 @@ class TodoService {
             }
 
             // Find all Todos that belong to the specific User
-            const todos = await Todo.find({ userId: userId });
+            const todos = await Todo.find({ user: userId });
             return todos;
         } catch (err: any) {
             throw new Error(err)
