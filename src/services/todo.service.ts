@@ -29,7 +29,7 @@ class UserService {
 
             // Save the Todo to the database
             const savedTodo = await todo.save();
-            return todo;
+            return savedTodo;
         } catch (err: any) {
             throw new Error(err);
         }
