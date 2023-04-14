@@ -1,6 +1,6 @@
 
 import { NextFunction, Request, Response } from 'express';
-import todoService from '../services/user.service';
+import todoService from '../services/todo.service';
 import { Types } from 'mongoose';
 class UserController {
 
