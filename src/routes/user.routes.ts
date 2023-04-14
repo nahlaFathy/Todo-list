@@ -12,21 +12,13 @@ class UserRouter {
 	}
 
 	private _routes() {
-		this._router.post('/todo', authenticateUser, (req: Request, res: Response, next: NextFunction) => {
-			TodoController.createTodo(req, res, next);
-		});
+		this._router.post('/todo', authenticateUser, TodoController.createTodo);
 
-		this._router.put('/todo/:todoId', authenticateUser, (req: Request, res: Response, next: NextFunction) => {
-			TodoController.updateTodo(req, res, next);
-		});
+		this._router.put('/todo/:todoId', authenticateUser, TodoController.updateTodo);
 
-		this._router.delete('/todo/:todoId', authenticateUser, (req: Request, res: Response, next: NextFunction) => {
-			TodoController.deleteTodo(req, res, next);
-		});
+		this._router.delete('/todo/:todoId', authenticateUser, TodoController.deleteTodo);
 
-		this._router.get('/todo/:todoId', authenticateUser, (req: Request, res: Response, next: NextFunction) => {
-			TodoController.getTodoForUser(req, res, next);
-		});
+		this._router.get('/todo/:todoId', authenticateUser, TodoController.getTodoForUser);
 	}
 
 }
